@@ -95,7 +95,7 @@ router.delete("/:id", (req, res) => {
     res.status(204).send();
 });
 
-//PATCH /api/tasks/:id/toggle - Toggle task completion status
+// PATCH /api/tasks/:id/toggle - Toggle task completion status
 router.patch("/:id/toggle", (req, res) => {
     console.log("Toggle task completion status");
     const taskId = parseInt(req.params.id);
