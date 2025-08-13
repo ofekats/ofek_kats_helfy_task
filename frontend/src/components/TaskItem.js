@@ -21,7 +21,7 @@ function TaskItem({ task, toggleTask, deleteTask, updateTask }) {
 
 
   return (
-    <div className="TaskItem">
+    <div className={`TaskItem ${task.priority}`}>
       {isEditing ? (
         <>
           <input value={title} onChange={e => setTitle(e.target.value)} />

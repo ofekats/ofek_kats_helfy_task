@@ -9,13 +9,6 @@ button {
   cursor: pointer;
 }
 
-.TaskItem {
-  border: 1px solid #007c9a;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f0f8fa;
-}
 
 .TaskItem button{
     margin-right: 10px; 
@@ -50,4 +43,25 @@ button {
 .TaskFilter button.active {
   background-color: #007c9a;
   color: #f0f8fa;
+}
+
+
+.TaskItem {
+  border: 1px solid #007c9a;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+
+.TaskItem.low {
+  background-color: #d4edda;
+}
+
+.TaskItem.medium {
+  background-color: #fff3cd;
+}
+
+.TaskItem.high {
+  background-color: #f8d7da; 
 }
