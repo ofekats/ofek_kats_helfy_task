@@ -26,10 +26,12 @@ router.post("/", (req, res) => {
     
     //validate data
     if (!title || typeof title !== "string") {
+        console.error("Title is required and must be a string");
         return res.status(400).json({ error: "Title is required and must be a string" });
     }
     const validPriorities = ["low", "medium", "high"];
     if (priority && !validPriorities.includes(priority)) {
+        console.error("Priority must be 'low', 'medium' or 'high'");
         return res.status(400).json({ error: "Priority must be 'low', 'medium' or 'high'" });
     }
 
@@ -44,6 +46,7 @@ router.post("/", (req, res) => {
 
 
     data.tasks.push(newTask);
+    console.log("New task created id:", newTask.id);
     res.status(201).json(newTask);
 });
 
@@ -54,6 +57,7 @@ router.put("/:id", (req, res) => {
     const task = data.tasks.find(t => t.id === taskId);
 
     if (!task) {
+        console.error("Task not found");
         return res.status(404).json({ error: "Task not found" });
     }
 
@@ -73,9 +77,22 @@ router.put("/:id", (req, res) => {
     if (priority !== undefined && validPriorities.includes(priority)){
         task.priority = priority;
     } 
-
+    console.log("Task updated id:", taskId);
     res.json(task);
 });
 
+// DELETE /api/tasks/:id - Delete a task
+router.delete("/:id", (req, res) => {
+    console.log("Delete a task");
+    const taskId = parseInt(req.params.id);
+    const indexToDel = data.tasks.findIndex(t => t.id === taskId);
+    if (indexToDel === -1){
+        console.error("Task not found");
+        return res.status(404).json({ error: "Task not found" });
+    } 
+    data.tasks.splice(indexToDel, 1);
+    console.log("Task deleted id:", taskId);
+    res.status(204).send();
+});
 
 module.exports = router;
