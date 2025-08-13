@@ -16,7 +16,7 @@ export const addTask = async (task) => {
     return await res.json();
 };
 
-export const UpdateTask = async (task) => {
+export const updateTask = async (task) => {
     //Update a task
     const res = await fetch(`${API_URL}/${task.id}`, {
         method: "PUT",

@@ -45,20 +45,26 @@ function App() {
       if (filter === "pending"){
         return !task.completed;
       }
-  });
-}
+    });
+  }
+
+  async function updateTask(updatedTask) {
+    const taskFromServer = await tasksService.updateTask(updatedTask);
+    setTasks(tasks.map(t => (t.id === taskFromServer.id ? taskFromServer : t)));
+  }
 
   return (
     <>
       <TaskForm
       addTask={addTask}/>
-      
+
       <TaskFilter filter={filter} setFilter={setFilter} />
 
       <TaskList
         tasks={getFilteredTasks(tasks, filter)}
         toggleTask={toggleTask}
         deleteTask={deleteTask}
+        updateTask={updateTask}
       />
     </>
   );
