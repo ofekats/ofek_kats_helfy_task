@@ -95,4 +95,21 @@ router.delete("/:id", (req, res) => {
     res.status(204).send();
 });
 
+//PATCH /api/tasks/:id/toggle - Toggle task completion status
+router.patch("/:id/toggle", (req, res) => {
+    console.log("Toggle task completion status");
+    const taskId = parseInt(req.params.id);
+    const task = data.tasks.find(t => t.id === taskId);
+
+    if (!task) {
+        console.error("Task not found");
+        return res.status(404).json({ error: "Task not found" });
+    }
+
+    task.completed = !task.completed;
+    console.log("Task id:", taskId, " completion toggled to ", task.completed);
+
+    res.json(task);
+});
+
 module.exports = router;
