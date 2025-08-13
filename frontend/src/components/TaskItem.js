@@ -1,19 +1,28 @@
 import React from "react";
 
 function TaskItem({ task, toggleTask, deleteTask }) {
-  return (
-    <div>
-      <h3>
-        {task.title}
-      </h3>
-      <p>{task.description}</p>
-      <p>Priority: {task.priority}</p>
-      <button onClick={() => toggleTask(task.id)}>
-        {task.completed ? "Undo" : "Complete"}
-      </button>
-      <button onClick={() => deleteTask(task.id)}>Delete</button>
-    </div>
-  );
+
+    async function deleteThisTask(id){
+        const confirmed = window.confirm("Are you sure you want to delete this task?");
+        if (!confirmed){
+            return;
+        }
+        await deleteTask(id); 
+    }
+
+    return (
+        <div className="TaskItem">
+        <h3>
+            {task.title}
+        </h3>
+        <p>{task.description}</p>
+        <p>Priority: {task.priority}</p>
+        <button onClick={() => toggleTask(task.id)}>
+            {task.completed ? "Undo" : "Complete"}
+        </button>
+        <button onClick={() => deleteThisTask(task.id)}>Delete</button>
+        </div>
+    );
 }
 
 export default TaskItem;

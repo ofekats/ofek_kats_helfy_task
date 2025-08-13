@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import * as tasksService from "./services/tasksService";
 import TaskList from "./components/TaskList";
 import TaskForm from "./components/TaskForm";
+import "./style/styles.css";
 
 
 function App() {
