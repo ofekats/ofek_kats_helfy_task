@@ -47,7 +47,35 @@ router.post("/", (req, res) => {
     res.status(201).json(newTask);
 });
 
+// PUT /api/tasks/:id - Update a task
+router.put("/:id", (req, res) => {
+    console.log("Update a task");
+    const taskId = parseInt(req.params.id);
+    const task = data.tasks.find(t => t.id === taskId);
 
+    if (!task) {
+        return res.status(404).json({ error: "Task not found" });
+    }
+
+    const { title, description, completed, priority } = req.body;
+
+    //validate data and change it
+    if (title !== undefined && typeof title === "string"){
+        task.title = title;
+    } 
+    if (description !== undefined && typeof description === "string"){
+        task.description = description;
+    } 
+    if (completed !== undefined && typeof completed === "boolean"){
+        task.completed = completed;
+    } 
+    const validPriorities = ["low", "medium", "high"];
+    if (priority !== undefined && validPriorities.includes(priority)){
+        task.priority = priority;
+    } 
+
+    res.json(task);
+});
 
 
 module.exports = router;
