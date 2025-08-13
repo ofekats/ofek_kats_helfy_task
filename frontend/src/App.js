@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import * as tasksService from "./services/tasksService";
 import TaskList from "./components/TaskList";
 import TaskForm from "./components/TaskForm";
+import TaskFilter from "./components/TaskFilter";
 import "./style/styles.css";
 
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [filter, setFilter] = useState("all");
 
   async function fetchTasks(){
     const data = await tasksService.getAllTasks();
@@ -32,14 +34,32 @@ function App() {
     setTasks(tasks.map(t => (t.id === taskId ? updatedTask : t)));
   }
 
+  function getFilteredTasks(tasks, filter) {
+    return tasks.filter(task => {
+      if (filter === "all"){
+        return true;
+      }
+      if (filter === "completed"){
+        return task.completed;
+      }
+      if (filter === "pending"){
+        return !task.completed;
+      }
+  });
+}
+
   return (
     <>
       <TaskForm
       addTask={addTask}/>
-      <TaskList 
-      tasks={tasks}
-      toggleTask={toggleTask}
-      deleteTask={deleteTask}/>
+      
+      <TaskFilter filter={filter} setFilter={setFilter} />
+
+      <TaskList
+        tasks={getFilteredTasks(tasks, filter)}
+        toggleTask={toggleTask}
+        deleteTask={deleteTask}
+      />
     </>
   );
 }

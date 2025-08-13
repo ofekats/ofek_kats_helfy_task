@@ -17,6 +17,10 @@ button {
   background-color: #f0f8fa;
 }
 
+.TaskItem button{
+    margin-right: 10px; 
+}
+
 .TaskForm {
   display: flex;
   flex-direction: column;
@@ -30,4 +34,20 @@ button {
   display: flex;
   flex-direction: column;
   gap: 3px;
+}
+
+.TaskFilter {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.TaskFilter button:hover {
+  background-color: #007c9a;
+  color: #f0f8fa;
+}
+
+.TaskFilter button.active {
+  background-color: #007c9a;
+  color: #f0f8fa;
 }

@@ -17,8 +17,9 @@ function TaskItem({ task, toggleTask, deleteTask }) {
         </h3>
         <p>{task.description}</p>
         <p>Priority: {task.priority}</p>
+        <p>Created at: {new Date(task.createdAt).toLocaleString()}</p>
         <button onClick={() => toggleTask(task.id)}>
-            {task.completed ? "Undo" : "Complete"}
+            {task.completed ? "Completed" : "Pending"}
         </button>
         <button onClick={() => deleteThisTask(task.id)}>Delete</button>
         </div>
